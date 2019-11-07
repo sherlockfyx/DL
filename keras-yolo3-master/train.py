@@ -42,7 +42,8 @@ def train(model, annotation_path, input_shape, anchors, num_classes, log_dir='lo
             validation_data=data_generator_wrap(lines[num_train:], batch_size, input_shape, anchors, num_classes),
             validation_steps=max(1, num_val//batch_size),
             epochs=20,
-            initial_epoch=0)
+            initial_epoch=0,
+			callbacks=[TensorBoard(log_dir='./tmp/log')])
     model.save_weights(log_dir + 'trained_weights.h5')
 
 def get_classes(classes_path):
